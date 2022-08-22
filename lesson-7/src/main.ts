@@ -140,11 +140,7 @@ console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
       */
 
     // ↓↓↓ klasė ↓↓↓
-    const hasElement = <T>(el: T | undefined): el is T => el !== undefined;
     class Queue<T> {
-        private static elNotEmpty = <T>(el: T | undefined): el is T => el !== undefined;
-
-        private index: number;
 
         private head: number;
 
@@ -155,21 +151,19 @@ console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
         [x: number]: T | undefined;
 
         constructor() {
-            this.index = -1;
             this.head = 0;
             this.tail = 0;
             this.elements = {};
         }
 
         public enqueue(data: T) {
-            this.elements[this.tail] = data;
             this.tail += 1;
+            this.elements[this.tail] = data;
         }
 
-        public pop(): T | null {
+        public dequeue(): T | null {
             const item = this.elements[this.head];
             delete this.elements[this.head];
-            this.index -= 1;
             this.head += 1;
             return item;
         }
@@ -224,7 +218,7 @@ console.group('2. Eilės (Queue) duomenų struktūros kūrimas');
         numStack.enqueue(600);
         console.log(numStack);
 
-        console.log(numStack.pop());
+        console.log(numStack.dequeue());
     }
     console.groupEnd();
 
